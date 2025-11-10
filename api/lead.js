@@ -1,16 +1,10 @@
 // /api/lead.js
 module.exports = async (req, res) => {
-  if (req.method !== 'POST') {
-    res.status(405).json({ error: 'Method not allowed' });
-    return;
-  }
+  if (req.method !== 'POST') return res.status(405).json({ error: 'Method not allowed' });
 
   try {
     const { name, phone, city, product, ts, page, utm, ua } = req.body || {};
-    if (!name || !phone) {
-      res.status(400).json({ error: 'Missing fields' });
-      return;
-    }
+    if (!name || !phone) return res.status(400).json({ error: 'Missing fields' });
 
     const payload = {
       ts: ts || Date.now(),
